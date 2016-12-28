@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 
 class Cart extends Component {
+
   render() {
+    const { cart } = this.props
+    console.log("cart", cart);
     return (
-      <h2>Cart Page</h2>
+      <div className="cart">
+        <h2>Cart Page</h2>
+        {JSON.stringify(cart)}
+      </div>
+
     )
   }
 }
