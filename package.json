@@ -2,7 +2,6 @@
   "name": "cart",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/yashuvit89/cart",
   "devDependencies": {
     "react-scripts": "0.8.4"
   },
