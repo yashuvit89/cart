@@ -3,16 +3,22 @@ import React, { Component } from 'react';
 import ProductItem from './ProductItem';
 import Filter from './Filter';
 
+import { getFilteredProducts } from '../helper';
+
 class ProductList extends Component {
 
   render() {
+    const { products } = this.props
+    const allProducts = products.products
+    const filteredProducts = getFilteredProducts(allProducts, this.props.filters);
+
     return (
       <div className="list">
         <h2>Product List</h2>
-        <Filter />
+        <Filter filters={products.filters} updateFilter={this.props.updateFilter}/>
         <ul className="list-of-products">
           {
-            this.props.products.products
+            filteredProducts
               .map(prod => {
                 // Get ID from image name, other properties are not unique in given data set
                 prod.prodId = prod.image.split('.')[0];

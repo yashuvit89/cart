@@ -11,32 +11,47 @@ class App extends Component {
     this.state = {
       products: products,
       cart: {},
+      filters: {}
     }
     this.addToCart = this.addToCart.bind(this)
+    this.updateFilter = this.updateFilter.bind(this)
   }
 
-  // Handle add to cart
+  /*
+    Handle add to cart
+    - if product already exists - increment the quantity, else add product to cart
+  */
   addToCart(e) {
       e.preventDefault();
 
       const prodId = e.target.id;
-      console.log("Product ID", prodId);
-
       const cart = { ...this.state.cart };
       cart[prodId] = cart[prodId] + 1 || 1;
 
       this.setState({ cart });
   }
 
+  /*
+    Update state with filtered products
+  */
+  updateFilter(filters) {
+    this.setState({ filters });
+  }
+
   render() {
     // Passing state from App to necessary components, can be accessible via props
+    // Pass state + props + any methods
     const children = React.Children.map(this.props.children, (child) => {
-      return React.cloneElement(child, { ...this.state, addToCart: this.addToCart})
+      return React.cloneElement(child,
+        {
+          ...this.state,
+          addToCart: this.addToCart,
+          updateFilter: this.updateFilter
+        })
     });
 
     return (
       <div className="main">
-        {console.log(this.props)}
         <Header />
         {children}
       </div>
