@@ -17,6 +17,7 @@ function filterProducts(allProducts, filterType, key) {
 
     let prods = allProducts.filter((prod) => {
             for(let i = 0; i < filterType.length; i++){
+              // Special case as price is for range type filter
               if(key === "price"){
                 let price = filterType[i].split('-');
                 let min = price[0];
@@ -48,10 +49,26 @@ function filterProducts(allProducts, filterType, key) {
 export function getFilteredProducts(products, filters) {
     // Iterate over given filters
     for(let key in filters){
+      if(filters.hasOwnProperty(key)) {
         let filterType = filters[key];
 
         // Returns filtered products for a filter - which is used for next filter
         products = filterProducts(products, filterType, key);
+
+      }
     }
+
+
     return products;
+}
+
+
+// Find Product Details in all products
+// Only way to uniquely identify in given data set is image property
+export function getProductDetails(products, productId) {
+  const product = products.find(prod => {
+    return prod.image.indexOf(productId) > -1
+  })
+
+  return product;
 }

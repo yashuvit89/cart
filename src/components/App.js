@@ -23,6 +23,7 @@ class App extends Component {
   */
   addToCart(e) {
       e.preventDefault();
+      e.target.innerText = "Added !";
 
       const prodId = e.target.id;
       const cart = { ...this.state.cart };
@@ -51,7 +52,7 @@ class App extends Component {
     });
 
     return (
-      <div className="main">
+      <div className="wrapper">
         <Header />
         {children}
       </div>

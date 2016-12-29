@@ -5,16 +5,16 @@ class Filter extends Component {
   // Generates html for filter checkboxes
   generateFilters(filter) {
     return (
-      <div key={'filterBlock'+ filter.name}>
-        <h4>{filter.name}</h4>
+      <div key={'filterBlock'+ filter.name} className="filterType">
+        <div className="filterName">{filter.name}</div>
         {/* Iterate over all filters and generate input checkboxes for a particular type of filter */}
         {
           filter.values.map(value => {
               const inputId = 'input' + value;
               return (
                 <div key={inputId} className="filter-box">
-                  <label htmlFor={inputId}>{value}</label>
                   <input id={inputId} type="checkbox" name={filter.name} value={value}/>
+                  <label className="inputLabel" htmlFor={inputId}>{value}</label>
                 </div>
               )
           })
@@ -42,8 +42,8 @@ class Filter extends Component {
 
   render() {
     return (
-      <div className="filter">
-        <h2>Filter Page</h2>
+      <aside className="filter aside">
+        <div className="filterTitle">Filters</div>
         <form ref={(input) => this.filterForm = input} onChange={(e) => this.onFormChange(e)}>
           {
             this.props.filters
@@ -52,7 +52,7 @@ class Filter extends Component {
               })
           }
         </form>
-      </div>
+      </aside>
     )
   }
 }

@@ -8,10 +8,18 @@ class ProductItem extends Component {
     return (
       <li className="product-item">
         <Link to={"detail/" + product.prodId}>
-          {product.name}
-          {product.measurement}
-          {product.price}
-          <button id={product.prodId} onClick={this.props.addToCart}>Add To Cart</button>
+          <img src={require(`../css/assets/${product.image}`)} alt={product.name} width="150px" height="150px"/>
+          <div className="productContent">
+            <h5>{product.name}</h5>
+            <div className="measurement">
+              {product.measurement}
+            </div>
+            <div className="price">
+              $ {product.price}
+            </div>
+            {this.props.isCart ? <h5> Quantity {this.props.count}</h5> : <div id={product.prodId} className="addToCartBtn" onClick={this.props.addToCart}>Add To Cart</div>}
+
+          </div>
         </Link>
       </li>
     )
